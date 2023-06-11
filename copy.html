@@ -1,0 +1,39 @@
+---
+- name: "TEST NAUTOBOT INVENTORY"
+  connection: "network_cli"
+  hosts: "all"
+  gather_facts: "no"
+
+  vars:
+    router_ip: 10.0.1.1
+    subnet_mask: 255.255.255.0
+    ansible_network_os: ios
+
+  tasks:
+    - name: "get facts"
+      vyos.vyos.vyos_facts:
+        gather_subset: config
+      register: ansible_facts
+
+    - name: "Get deprecations"
+      debug:
+        msg: "{{ ansible_facts['deprecations'] }}"
+
+    - name: "CREATE_A"
+      connection: "network_cli"
+      hosts: routerA
+      tasks:
+        - name: configure the remote device
+        vyos.vyos.vyos_config:
+          lines:
+          - set interfaces ethernet eth0 address {{ IP_IF_routerA }}
+
+    - name: "CREATE_B"
+      connection: "network_cli"
+      hosts: routerB
+      tasks:
+        - name: configure the remote device
+        vyos.vyos.vyos_config:
+          lines:
+          - set interfaces ethernet eth0 address {{ IP_IF_routerB }}
+          

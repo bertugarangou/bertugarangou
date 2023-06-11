@@ -23,17 +23,17 @@
       connection: "network_cli"
       hosts: routerA
       tasks:
-        - name: configure the remote device
-        vyos.vyos.vyos_config:
-          lines:
-          - set interfaces ethernet eth0 address {{ IP_IF_routerA }}
+        - name: "configure the remote device"
+          vyos.vyos.vyos_config:
+            lines:
+            - "set interfaces ethernet eth0 address {{ IP_IF_routerA }}"
 
     - name: "CREATE_B"
       connection: "network_cli"
       hosts: routerB
       tasks:
-        - name: configure the remote device
-        vyos.vyos.vyos_config:
-          lines:
-          - set interfaces ethernet eth0 address {{ IP_IF_routerB }}
+        - name: "configure the remote device"
+          vyos.vyos.vyos_config:
+            lines:
+            - "set interfaces ethernet eth0 address {{ IP_IF_routerB }}"
           
